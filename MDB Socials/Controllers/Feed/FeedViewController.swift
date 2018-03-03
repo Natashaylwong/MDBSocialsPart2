@@ -50,6 +50,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         activityIndicator.startAnimating()
+//        delegate = self.MyTabBarController
         self.setupNavBar()
         self.setupCollectionView()
         Users.getCurrentUser(withId: (Auth.auth().currentUser?.uid)!).then{(cUser) in
@@ -91,24 +92,25 @@ class FeedViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = color
         
         let addButton = UIBarButtonItem(image: UIImage(named: "adds"), style: .done, target: self, action: #selector(addButtonPressed))
-//        navigationItem.rightBarButtonItem  = addButton
-        self.navigationController?.viewControllers[1].navigationItem.rightBarButtonItem = addButton
+        navigationItem.rightBarButtonItem  = addButton
+//        self.tabBarController?.viewControllers![0].navigationItem.rightBarButtonItem = addButton
 
         let logOutButton = UIBarButtonItem(image: UIImage(named: "logout"), style: .done, target: self, action: #selector(logOut))
-//        navigationItem.leftBarButtonItem  = logOutButton
-        self.navigationController?.viewControllers[1].navigationItem.leftBarButtonItem = logOutButton
-        //navigationItem.title = "MDB Socials: Feed"
-        self.navigationController?.viewControllers[1].navigationItem.title = "MDB Socials: Feed"
+        navigationItem.leftBarButtonItem  = logOutButton
+//        self.tabBarController?.viewControllers![0].navigationItem.leftBarButtonItem = logOutButton
+        navigationItem.title = "MDB Socials: Feed"
+   //     self.tabBarController?.viewControllers![0].navigationItem.title = "MDB Socials: Feed"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Strawberry Blossom", size: 40)!]
 
     }
     
     // Logging out the current user
     @objc func logOut() {
-        UserAuthHelper.logOut {
-            self.dismiss(animated: true, completion: nil)
-            self.navigationController!.popToRootViewController(animated: true)
-        }
+//        UserAuthHelper.logOut {
+//            self.dismiss(animated: true, completion: nil)
+//            self.navigationController!.popToRootViewController(animated: true)
+//        }
+        
     }
 
     // Creating a new post

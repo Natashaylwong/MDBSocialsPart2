@@ -17,6 +17,7 @@ class MyTabBarController: UITabBarController {
 //        ]
 //        UITabBarItem.appearance().setTitleTextAttributes(attrs, for: .normal)
 //        super.viewDidLoad()
+        
         let appearance = UITabBarItem.appearance()
         let attributes = [NSAttributedStringKey.font:UIFont(name: "Strawberry Blossom", size: 18)]
         appearance.setTitleTextAttributes(attributes, for: .normal)

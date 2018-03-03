@@ -199,7 +199,7 @@ class DetailViewController: UIViewController {
         interestedButton.setImage(tintedImage, for: .normal)
         if interested == nil {
             interestedButton.tintColor = UIColor.black
-        } else if interested.contains(currentUser.id!) {
+        } else if interested.contains(self.id) {
             interestedButton.tintColor = UIColor.red
         } else {
             interestedButton.tintColor = UIColor.black
