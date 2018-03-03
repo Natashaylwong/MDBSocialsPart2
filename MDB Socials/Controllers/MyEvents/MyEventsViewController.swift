@@ -24,12 +24,9 @@ class MyEventsViewController: UIViewController {
     var navBar: UINavigationBar!
     var interestedModal: InterestedModal!
     var filteredPosts: [Post] = []
+    var id = String()
     override func viewDidAppear(_ animated: Bool) {
         setupNavBar()
-        Users.getCurrentUser(withId: (Auth.auth().currentUser?.uid)!).then{(cUser) in
-            self.currentUser = cUser
-        }
-        print ("\(currentUser)")
     }
     
     override func viewDidLoad() {
@@ -38,21 +35,21 @@ class MyEventsViewController: UIViewController {
         activityIndicator.startAnimating()
       //  self.setupNavBar()
         self.setupCollectionView()
-        Users.getCurrentUser(withId: (Auth.auth().currentUser?.uid)!).then{(cUser) in
+        Users.getCurrentUser(withId: (Auth.auth().currentUser?.uid)!).then{(cUser) -> Void in
             self.currentUser = cUser
+            print("\(self.currentUser)")
         }
-        print("\(self.currentUser)")
-        
         FirebaseSocialAPIClient.fetchPosts(withBlock: { (posts) in
             self.posts.append(contentsOf: posts)
             //            if posts.count > 1 {
             //                posts = Utils.sortPosts(posts: posts)
             //            }
+            self.id = (Auth.auth().currentUser?.uid)!
             for post in posts {
-                if post.posterId == self.currentUser?.id {
+                if post.posterId == self.id {
                     self.filteredPosts.append(post)
                 } else if post.interested != nil {
-                    if (post.interested?.contains((self.currentUser?.id!)!))! {
+                    if (post.interested?.contains(self.id))! {
                         self.filteredPosts.append(post)
                     }
                 }

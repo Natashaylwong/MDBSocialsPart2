@@ -84,6 +84,7 @@ class FeedViewController: UIViewController {
         view.endEditing(true)
         super.touchesBegan(touches, with: event)
     }
+
     
     func setupNavBar() {
         self.navigationController?.navigationBar.tintColor = UIColor.white;

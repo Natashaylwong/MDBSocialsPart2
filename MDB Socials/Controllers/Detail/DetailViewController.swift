@@ -32,6 +32,7 @@ class DetailViewController: UIViewController {
     var scrollView: UIScrollView!
     var directionButton: UIButton!
     var directionLabel: UILabel!
+    var id = String()
 
 
     
@@ -39,6 +40,7 @@ class DetailViewController: UIViewController {
 
     
     override func viewWillAppear(_ animated: Bool) {
+        self.id = (Auth.auth().currentUser?.uid)!
         if interested == nil {
             interestedLabel.text = "\(0)"
             interestedButton.tintColor = UIColor.black
@@ -46,7 +48,11 @@ class DetailViewController: UIViewController {
         } else {
             interestCount = interested.count
             interestedLabel.text = "\(post.interested!.count)"
-            interestedButton.tintColor = UIColor.red
+            if (post.interested?.contains(self.id))! {
+                interestedButton.tintColor = UIColor.red
+            } else {
+                interestedButton.tintColor = UIColor.black
+            }
         }
     }
     override func viewDidLoad() {
