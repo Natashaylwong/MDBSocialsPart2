@@ -1,0 +1,6 @@
+framework module Pods_MDB_Socials {
+  umbrella header "Pods-MDB Socials-umbrella.h"
+
+  export *
+  module * { export * }
+}
