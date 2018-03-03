@@ -196,8 +196,11 @@ class NewPostViewController: UIViewController {
             let currentUser = self.currentUser
             let imageData = UIImageJPEGRepresentation(imagePost.image!, 0.9)
             let description = descriptionTextField.text!
+            print("\(description)")
             let name = nameEventTextField.text!
+            print("\(name)")
             let date = datePicker.date
+            print("\(date)")
             let dateFormatter: DateFormatter = DateFormatter()
             let interested = 0
             

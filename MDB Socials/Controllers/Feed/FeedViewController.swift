@@ -25,8 +25,6 @@ class FeedViewController: UIViewController {
     var navBar: UINavigationBar!
     var color = Constants.appColor
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -66,12 +64,17 @@ class FeedViewController: UIViewController {
     func setupNavBar() {
         navigationController?.navigationBar.tintColor = UIColor.white;
         navigationController?.navigationBar.barTintColor = color
-        let addButton = UIBarButtonItem(image: UIImage(named: "adds"), style: .plain, target: self, action: #selector(addButtonPressed))
-        self.navigationItem.rightBarButtonItem  = addButton
-        let logOutButton = UIBarButtonItem(image: UIImage(named: "logout"), style: .plain, target: self, action: #selector(FeedViewController.logOut))
-        self.navigationItem.leftBarButtonItem  = logOutButton
-        self.navigationItem.title = "MDB Socials: Feed"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Strawberry Blossom", size: 40)!]
+        
+        let addButton = UIBarButtonItem(image: UIImage(named: "adds"), style: .done, target: self, action: #selector(addButtonPressed))
+//        navigationItem.rightBarButtonItem  = addButton
+        navigationController?.viewControllers[1].navigationItem.rightBarButtonItem = addButton
+
+        let logOutButton = UIBarButtonItem(image: UIImage(named: "logout"), style: .done, target: self, action: #selector(logOut))
+//        navigationItem.leftBarButtonItem  = logOutButton
+        navigationController?.viewControllers[1].navigationItem.leftBarButtonItem = logOutButton
+        //navigationItem.title = "MDB Socials: Feed"
+        navigationController?.viewControllers[1].navigationItem.title = "MDB Socials: Feed"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Strawberry Blossom", size: 40)!]
 
     }
     
