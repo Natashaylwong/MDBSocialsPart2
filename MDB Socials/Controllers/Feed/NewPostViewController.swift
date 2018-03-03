@@ -36,7 +36,10 @@ class NewPostViewController: UIViewController {
         setupEventImageView()
         setupCalendar()
         if let currUser = Auth.auth().currentUser {
-            Users.getCurrentUser(withId: currUser.uid).then { (currentUser) in
+//            Users.getCurrentUser(withId: currUser.uid).then { (currentUser) in
+//                self.currentUser = currentUser
+//            }
+            FirebaseSocialAPIClient.fetchUser(id: currUser.uid).then { (currentUser) in
                 self.currentUser = currentUser
             }
         }
@@ -202,7 +205,7 @@ class NewPostViewController: UIViewController {
             let date = datePicker.date
             print("\(date)")
             let dateFormatter: DateFormatter = DateFormatter()
-            let interested = 0
+            let interested = ["help"]
             
             // Set date format
             dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"

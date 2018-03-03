@@ -30,12 +30,15 @@ class DetailViewController: UIViewController {
     var color = Constants.appColor
 
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if interested == nil {
-            interestedLabel.text = "\(interestCount)"
+            interestedLabel.text = "\(0)"
+            interestedButton.tintColor = UIColor.black
+
         } else {
             interestCount = interested.count
-            interestedLabel.text = "\(interestCount)"
+            interestedLabel.text = "\(post.interested!.count)"
+            interestedButton.tintColor = UIColor.red
         }
     }
     override func viewDidLoad() {

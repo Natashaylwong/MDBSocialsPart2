@@ -36,6 +36,11 @@ class PostCollectionViewCell: UICollectionViewCell {
         interestedButton.setImage(tintedImage, for: .normal)
         interestedButton.tintColor = UIColor.white
         addSubview(interestedButton)
+        
+        numberInterested = UILabel(frame: CGRect(x: self.contentView.frame.width - 80, y: self.contentView.frame.height - 40, width: 30, height: 30))
+        numberInterested.textColor = UIColor.white
+        numberInterested.text = "\(0)"
+        addSubview(numberInterested)
     }
     
     func setupProfileImage() {

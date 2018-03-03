@@ -8,33 +8,13 @@
 
 import UIKit
 import Firebase
+import PromiseKit
 
 class FeedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
-    }
-    var selectedCell: Int?
-    var newPostView: UITextField!
-    var newPostButton: UIButton!
-    var postCollectionView: UICollectionView!
-    var posts: [Post] = []
-    var postsRef: DatabaseReference = Database.database().reference().child("Posts")
-    var storage: StorageReference = Storage.storage().reference()
-    var currentUser: Users?
-    var navBar: UINavigationBar!
-    var color = Constants.appColor
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        activityIndicator.startAnimating()
-        self.setupNavBar()
-        self.setupCollectionView()
-        Users.getCurrentUser(withId: (Auth.auth().currentUser?.uid)!).then{(cUser) in
-            self.currentUser = cUser
-        }
-        
+        setupNavBar()
         FirebaseSocialAPIClient.fetchPosts(withBlock: { (posts) in
             self.posts.append(contentsOf: posts)
             for post in posts {
@@ -46,14 +26,57 @@ class FeedViewController: UIViewController {
                             
                         }
                 }
-//                let imageUrl = post.imageUrl
-//                Post.getEventPic(withUrl: imageUrl) {
-//                    self.postCollectionView.reloadData()
-//                }
-            }
-            activityIndicator.stopAnimating()
-
+            }            
         })
+    }
+    var modalView: AKModalView!
+    var itemDetailView: InterestedModal!
+    
+    var selectedCell: Int?
+    var newPostView: UITextField!
+    var newPostButton: UIButton!
+    var postCollectionView: UICollectionView!
+    var posts: [Post] = []
+    var postsRef: DatabaseReference = Database.database().reference().child("Posts")
+    var storage: StorageReference = Storage.storage().reference()
+    var currentUser: Users?
+    var navBar: UINavigationBar!
+    var color = Constants.appColor
+    var post: Post?
+//    var orderedPost:
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicator.startAnimating()
+        self.setupNavBar()
+        self.setupCollectionView()
+        Users.getCurrentUser(withId: (Auth.auth().currentUser?.uid)!).then{(cUser) in
+            self.currentUser = cUser
+        }
+        
+//        FirebaseSocialAPIClient.fetchPosts(withBlock: { (posts) in
+//            self.posts.append(contentsOf: posts)
+////            if posts.count > 1 {
+////                posts = Utils.sortPosts(posts: posts)
+////            }
+//            for post in posts {
+//                Post.getEventPic(withUrl: (post.imageUrl)!).then { img in
+//                    post.image = img
+//                    } .then {_ in
+//                        DispatchQueue.main.async {
+//                            self.postCollectionView.reloadData()
+//
+//                        }
+//                }
+////                let imageUrl = post.imageUrl
+////                Post.getEventPic(withUrl: imageUrl) {
+////                    self.postCollectionView.reloadData()
+////                }
+//            }
+//            activityIndicator.stopAnimating()
+//
+//        })
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -94,7 +117,7 @@ class FeedViewController: UIViewController {
     @objc func addNewPost(sender: UIButton!) {
         self.performSegue(withIdentifier: "toNewPost", sender: self)
     }
-    
+    // Setting up the Collection View
     func setupCollectionView() {
         let frame = CGRect(x: 0, y: 50, width: view.frame.width, height: view.frame.height-50)
         let cvLayout = UICollectionViewFlowLayout()
@@ -125,6 +148,11 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.postText.text = "Event: \n" + postInQuestion.eventName!
         cell.posterText.text = "Host: " + postInQuestion.poster!
         cell.profileImage.image = postInQuestion.image
+        if postInQuestion.interested == nil {
+            cell.numberInterested.text = "\(0)"
+        } else {
+            cell.numberInterested.text = "\(postInQuestion.interested!.count)"
+        }
         return cell
     }
 
@@ -147,6 +175,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let postInQuestion = posts[selectedCell!]
             details.post = postInQuestion
             details.interested = postInQuestion.interested
+            print("\(postInQuestion.interested?.count)")
             details.poster = postInQuestion.poster
             details.eventName = postInQuestion.eventName
             details.descrip = postInQuestion.text

@@ -26,13 +26,16 @@ class SignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackground()
         setupTitle()
         setupTextFields()
         setupButtons()
         setupEventImageView()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
+        setupTitle()
     }
 
 
@@ -40,13 +43,7 @@ class SignupViewController: UIViewController {
         view.endEditing(true)
         super.touchesBegan(touches, with: event)
     }
-    
-    // Setting up MDB Social's title
-    func setupTitle() {
-        navigationController?.navigationBar.tintColor = UIColor.white;
-        navigationController?.navigationBar.barTintColor = color
-
-        
+    func setupBackground() {
         let width = UIScreen.main.bounds.size.width
         let height = UIScreen.main.bounds.size.height
         let imageViewBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
@@ -54,6 +51,21 @@ class SignupViewController: UIViewController {
         imageViewBackground.contentMode = UIViewContentMode.scaleAspectFill
         imageViewBackground.alpha = 0.5
         view.addSubview(imageViewBackground)
+    }
+    // Setting up MDB Social's title
+    func setupTitle() {
+        navigationController?.navigationBar.tintColor = UIColor.white;
+        navigationController?.navigationBar.barTintColor = color
+        
+
+        
+//        let width = UIScreen.main.bounds.size.width
+//        let height = UIScreen.main.bounds.size.height
+//        let imageViewBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+//        imageViewBackground.image = UIImage(named: "clouds")
+//        imageViewBackground.contentMode = UIViewContentMode.scaleAspectFill
+//        imageViewBackground.alpha = 0.5
+//        view.addSubview(imageViewBackground)
         
 //        titleApp = UILabel(frame: CGRect(x: 0, y: 80, width: view.frame.width, height: 100))
 //        titleApp.font = UIFont(name: "Strawberry Blossom", size: 80)
@@ -237,7 +249,7 @@ class SignupViewController: UIViewController {
             UserAuthHelper.createUser(email: email, password: password, withBlock: { (id) in
                 print(id)
                 FirebaseSocialAPIClient.createNewUser(id: id, name: name, email: email, username: username, profilePic: imageData!)
-                self.performSegue(withIdentifier: "toFeedFromSignup", sender: self)
+                self.performSegue(withIdentifier: "toFeed", sender: self)
             })
             
         }

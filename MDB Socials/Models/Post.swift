@@ -23,6 +23,7 @@ class Post: Mappable {
     var poster: String?
     var id: String?
     var image: UIImage?
+    var date: String?
     
     required init?(map: Map) {
 
@@ -30,13 +31,14 @@ class Post: Mappable {
 
     func mapping(map: Map) {
         text                        <- map["description"]
-        imageUrl                    <- map["imageUrl"]
+        imageUrl                    <- map["imageURL"]
         posterId                    <- map["hostId"]
         eventName                   <- map["name"]
         interested                  <- map["interested"]
         poster                      <- map["host"]
         id                          <- map["postId"]
         image                       <- map[""]
+        date                        <- map["date"]
     }
     
 //    init(id: String, postDict: [String:Any]?) {

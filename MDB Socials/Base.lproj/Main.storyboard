@@ -57,7 +57,7 @@
                         <viewLayoutGuide key="safeArea" id="qoN-SG-tEx"/>
                     </view>
                     <connections>
-                        <segue destination="n9g-kU-Bdf" kind="show" identifier="toFeedFromSignup" id="9DK-8N-hv6"/>
+                        <segue destination="n9g-kU-Bdf" kind="show" identifier="toFeed" id="9DK-8N-hv6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dt8-1e-uYR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -117,7 +117,7 @@
         <!--Item-->
         <scene sceneID="Qbx-KU-WMG">
             <objects>
-                <viewController id="640-rL-8o3" customClass="InterestedViewController" sceneMemberID="viewController">
+                <viewController id="640-rL-8o3" customClass="MyEventsViewController" customModule="MDB_Socials" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GgX-ac-6aw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -133,10 +133,10 @@
         <!--Tab Bar Controller-->
         <scene sceneID="ocx-cU-1E1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2QI-I4-KB1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="n9g-kU-Bdf" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IA0-Ou-TaG">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -145,11 +145,12 @@
                         <segue destination="640-rL-8o3" kind="relationship" relationship="viewControllers" id="BQg-r6-ilK"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2QI-I4-KB1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-817" y="984"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9DK-8N-hv6"/>
+        <segue reference="7Sc-0V-RoE"/>
     </inferredMetricsTieBreakers>
 </document>

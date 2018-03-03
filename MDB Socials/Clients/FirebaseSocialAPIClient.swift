@@ -25,6 +25,20 @@ class FirebaseSocialAPIClient {
         })
     }
     
+    // Fetching all users for the modal view
+    static func fetchUsersModal(withBlock: @escaping ([Users]) -> ()) {
+        let ref = Database.database().reference()
+        ref.child("Users").observe(.childAdded, with: { (snapshot) in
+            let json = JSON(snapshot.value)
+            if let dict = json.dictionaryObject{
+                if let user = Users(JSON: dict){
+                    withBlock([user])
+                }
+            }
+        })
+    }
+    
+    
     // Retrieving data from Firebase for a user
     static func fetchUser(id: String) -> Promise<Users> {
         return Promise { fulfill, _ in
@@ -41,7 +55,7 @@ class FirebaseSocialAPIClient {
     }
     
     // Creating a new post and saving it into Firebase
-    static func createNewPost(name: String, description: String, date: String, imageData: Data, host: String, hostId: String, interested: Int) {
+    static func createNewPost(name: String, description: String, date: String, imageData: Data, host: String, hostId: String, interested: [String]) {
         let postsRef = Database.database().reference().child("Posts")
         let key = postsRef.childByAutoId().key
         let storage = Storage.storage().reference().child("Event Images/\(key)")
@@ -78,14 +92,10 @@ class FirebaseSocialAPIClient {
             print(metadata)
             let imageURL = snapshot.metadata?.downloadURL()?.absoluteString as! String
             print(imageURL)
-            let newUser = ["name": name, "email": email, "username": username, "imageUrl": imageURL] as [String: Any]
+            let newUser = ["name": name, "email": email, "username": username, "id": id, "imageUrl": imageURL] as [String: Any]
             let childUpdates = ["\(id)": newUser]
             usersRef.updateChildValues(childUpdates)
-//            }
         }
-    }
-    
-    func storeProfileImage(image: Data) {
     }
 }
 

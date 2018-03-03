@@ -5,7 +5,6 @@
 //  Created by Natasha Wong on 2/20/18.
 //  Copyright © 2018 Natasha Wong. All rights reserved.
 //
-
 import UIKit
 import Firebase
 
@@ -17,11 +16,11 @@ class LoginViewController: UIViewController {
     var loginButton: UIButton!
     var signupButton: UIButton!
     var color = Constants.appColor
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view, typically from a nib.
         setupTitle()
         setupTextFields()
@@ -39,7 +38,7 @@ class LoginViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
         super.touchesBegan(touches, with: event)
-    
+        
     }
     
     func setupTitle() {
@@ -64,7 +63,7 @@ class LoginViewController: UIViewController {
         titleApp.textAlignment = .center
         titleApp.text = "MDB Socials"
         view.addSubview(titleApp)
-    
+        
     }
     
     func setupTextFields() {
@@ -137,7 +136,7 @@ class LoginViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
-
+        
         self.emailTextField.text = ""
         self.passwordTextField.text = ""
         UserAuthHelper.logIn(email: email, password: password, withBlock: {(user) in
@@ -145,11 +144,12 @@ class LoginViewController: UIViewController {
             self.passwordTextField.text = ""
             self.performSegue(withIdentifier: "toFeedFromLogin", sender: self)
         })
-
+        
     }
     
     @objc func signupButtonClicked(sender: UIButton!) {
         self.performSegue(withIdentifier: "toSignup", sender: self)
     }
-    
 }
+
+

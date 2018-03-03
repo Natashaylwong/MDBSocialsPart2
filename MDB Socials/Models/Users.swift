@@ -11,6 +11,7 @@ import UIKit
 import ObjectMapper
 import Firebase
 import PromiseKit
+import Haneke
 
 class Users: Mappable {
     var name: String?
@@ -66,7 +67,7 @@ class Users: Mappable {
 //            print("\(withId)")
 //            block(user)
 //        })
-//    }
+////    }
     
 //    func getProfilePic(withBlock: @escaping () -> ()) {
 //        //TODO: Get Picture from Storage
@@ -80,9 +81,16 @@ class Users: Mappable {
 //            }
 //        }
 //    }
-//    func getProfilePic() {
-//
-//    }
+    static func getProfilePic(withUrl: String) -> Promise<UIImage> {
+        return Promise { fulfill, _ in
+            let cache = Shared.imageCache
+            if let imageUrl = URL(string: withUrl) {
+                cache.fetch(URL: imageUrl as URL).onSuccess({ img in
+                    fulfill(img)
+                })
+            }
+        }
+    }
 //
     
 }

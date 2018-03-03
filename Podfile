@@ -16,7 +16,6 @@ target 'MDB Socials' do
   pod 'PromiseKit/Alamofire'
   pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
 
-
   # Pods for MDB Socials
 
   target 'MDB SocialsTests' do
