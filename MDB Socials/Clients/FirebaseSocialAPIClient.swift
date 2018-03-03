@@ -8,26 +8,38 @@
 
 import Foundation
 import Firebase
+import PromiseKit
+import SwiftyJSON
 
 class FirebaseSocialAPIClient {
-    // Retrieving data from Firebase for a post
-//    static func fetchPosts(withBlock: @escaping ([Post]) -> ()) {
-//        let ref = Database.database().reference()
-//        ref.child("Posts").observe(.childAdded, with: { (snapshot) in
-//            let post = Post(id: snapshot.key, postDict: snapshot.value as! [String : Any]?)
-//            withBlock([post])
-//        })
-//    }
-    
-    // Retrieving data from Firebase for a user
-    static func fetchUser(id: String, withBlock: @escaping (Users) -> ()) {
+    // Retrieving data from Firebase for Posts
+    static func fetchPosts(withBlock: @escaping ([Post]) -> ()) {
         let ref = Database.database().reference()
-        ref.child("Users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
-            let user = Users(id: snapshot.key, userDict: snapshot.value as! [String : Any]?)
-            withBlock(user)
-            
+        ref.child("Posts").observe(.childAdded, with: { (snapshot) in
+            let json = JSON(snapshot.value)
+            if let dict = json.dictionaryObject{
+                if let post = Post(JSON: dict){
+                    withBlock([post])
+                }
+            }
         })
     }
+    
+    // Retrieving data from Firebase for a user
+    static func fetchUser(id: String) -> Promise<Users> {
+        return Promise { fulfill, _ in
+            let ref = Database.database().reference()
+            ref.child("Users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+                let json = JSON(snapshot.value)
+                if let dict = json.dictionaryObject{
+                    if let user = Users(JSON: dict){
+                        fulfill(user)
+                    }
+                }
+            })
+        }
+    }
+    
     // Creating a new post and saving it into Firebase
     static func createNewPost(name: String, description: String, date: String, imageData: Data, host: String, hostId: String, interested: Int) {
         let postsRef = Database.database().reference().child("Posts")
@@ -55,16 +67,21 @@ class FirebaseSocialAPIClient {
 //                let newUser = ["name": name, "email": email, "username": username, "imageURL": imageURL]
 //        let childUpdates = ["/\(id)/": newUser]
 //        usersRef.updateChildValues(childUpdates)
+        
+        
         let usersRef = Database.database().reference().child("Users")
         let storage = Storage.storage().reference().child("User Images/\(id)")
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
-        storage.putData(profilePic, metadata: metadata).observe(.success) {(snapshot) in print("image stored")
+        storage.putData(profilePic, metadata: metadata).observe(.success) {(snapshot) in
+            print("image stored")
+            print(metadata)
             let imageURL = snapshot.metadata?.downloadURL()?.absoluteString as! String
             print(imageURL)
             let newUser = ["name": name, "email": email, "username": username, "imageUrl": imageURL] as [String: Any]
             let childUpdates = ["\(id)": newUser]
             usersRef.updateChildValues(childUpdates)
+//            }
         }
     }
     

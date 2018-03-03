@@ -36,9 +36,9 @@ class NewPostViewController: UIViewController {
         setupEventImageView()
         setupCalendar()
         if let currUser = Auth.auth().currentUser {
-            Users.getCurrentUser(withId: currUser.uid, block:{ (currentUser) in
+            Users.getCurrentUser(withId: currUser.uid).then { (currentUser) in
                 self.currentUser = currentUser
-            })
+            }
         }
         setupExit()
     }

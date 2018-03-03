@@ -40,9 +40,18 @@ class FeedViewController: UIViewController {
         FirebaseSocialAPIClient.fetchPosts(withBlock: { (posts) in
             self.posts.append(contentsOf: posts)
             for post in posts {
-                post.getEventPic() {
-                    self.postCollectionView.reloadData()
+                Post.getEventPic(withUrl: (post.imageUrl)!).then { img in
+                    post.image = img
+                    } .then {_ in
+                        DispatchQueue.main.async {
+                            self.postCollectionView.reloadData()
+                            
+                        }
                 }
+//                let imageUrl = post.imageUrl
+//                Post.getEventPic(withUrl: imageUrl) {
+//                    self.postCollectionView.reloadData()
+//                }
             }
             activityIndicator.stopAnimating()
 

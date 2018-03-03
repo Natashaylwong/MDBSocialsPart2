@@ -56,12 +56,10 @@ class Users: Mappable {
 
     static func getCurrentUser(withId: String) -> Promise<Users> {
         return Promise {fulfill, error in
-            FirebaseSocialAPIClient.fetchUser(id: withId, withBlock: {(user) in
-                print("\(withId)")
+            FirebaseSocialAPIClient.fetchUser(id: withId).then { user in
                 fulfill(user)
-            })
+            }
         }
-       
     }
 //    static func getCurrentUser(withId: String, block: @escaping (Users) -> ()) {
 //        FirebaseSocialAPIClient.fetchUser(id: withId, withBlock: {(user) in
