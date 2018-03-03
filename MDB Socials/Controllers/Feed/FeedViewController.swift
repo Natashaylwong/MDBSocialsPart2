@@ -12,22 +12,22 @@ import PromiseKit
 
 class FeedViewController: UIViewController {
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = false
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
         setupNavBar()
-        FirebaseSocialAPIClient.fetchPosts(withBlock: { (posts) in
-            self.posts.append(contentsOf: posts)
-            for post in posts {
-                Post.getEventPic(withUrl: (post.imageUrl)!).then { img in
-                    post.image = img
-                    } .then {_ in
-                        DispatchQueue.main.async {
-                            self.postCollectionView.reloadData()
-                            
-                        }
-                }
-            }            
-        })
+//        FirebaseSocialAPIClient.fetchPosts(withBlock: { (posts) in
+//            self.posts.append(contentsOf: posts)
+//            for post in posts {
+//                Post.getEventPic(withUrl: (post.imageUrl)!).then { img in
+//                    post.image = img
+//                    } .then {_ in
+//                        DispatchQueue.main.async {
+//                            self.postCollectionView.reloadData()
+//
+//                        }
+//                }
+//            }
+//        })
     }
     var modalView: AKModalView!
     var itemDetailView: InterestedModal!
@@ -42,7 +42,8 @@ class FeedViewController: UIViewController {
     var currentUser: Users?
     var navBar: UINavigationBar!
     var color = Constants.appColor
-    var post: Post?
+    var interestedModal: InterestedModal!
+
 //    var orderedPost:
 
     override func viewDidLoad() {
@@ -55,28 +56,28 @@ class FeedViewController: UIViewController {
             self.currentUser = cUser
         }
         
-//        FirebaseSocialAPIClient.fetchPosts(withBlock: { (posts) in
-//            self.posts.append(contentsOf: posts)
-////            if posts.count > 1 {
-////                posts = Utils.sortPosts(posts: posts)
-////            }
-//            for post in posts {
-//                Post.getEventPic(withUrl: (post.imageUrl)!).then { img in
-//                    post.image = img
-//                    } .then {_ in
-//                        DispatchQueue.main.async {
-//                            self.postCollectionView.reloadData()
-//
-//                        }
-//                }
-////                let imageUrl = post.imageUrl
-////                Post.getEventPic(withUrl: imageUrl) {
-////                    self.postCollectionView.reloadData()
-////                }
+        FirebaseSocialAPIClient.fetchPosts(withBlock: { (posts) in
+            self.posts.append(contentsOf: posts)
+//            if posts.count > 1 {
+//                posts = Utils.sortPosts(posts: posts)
 //            }
-//            activityIndicator.stopAnimating()
-//
-//        })
+            for post in posts {
+                Post.getEventPic(withUrl: (post.imageUrl)!).then { img in
+                    post.image = img
+                    } .then {_ in
+                        DispatchQueue.main.async {
+                            self.postCollectionView.reloadData()
+
+                        }
+                }
+//                let imageUrl = post.imageUrl
+//                Post.getEventPic(withUrl: imageUrl) {
+//                    self.postCollectionView.reloadData()
+//                }
+            }
+            activityIndicator.stopAnimating()
+
+        })
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -85,19 +86,19 @@ class FeedViewController: UIViewController {
     }
     
     func setupNavBar() {
-        navigationController?.navigationBar.tintColor = UIColor.white;
-        navigationController?.navigationBar.barTintColor = color
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
+        self.navigationController?.navigationBar.barTintColor = color
         
         let addButton = UIBarButtonItem(image: UIImage(named: "adds"), style: .done, target: self, action: #selector(addButtonPressed))
 //        navigationItem.rightBarButtonItem  = addButton
-        navigationController?.viewControllers[1].navigationItem.rightBarButtonItem = addButton
+        self.navigationController?.viewControllers[1].navigationItem.rightBarButtonItem = addButton
 
         let logOutButton = UIBarButtonItem(image: UIImage(named: "logout"), style: .done, target: self, action: #selector(logOut))
 //        navigationItem.leftBarButtonItem  = logOutButton
-        navigationController?.viewControllers[1].navigationItem.leftBarButtonItem = logOutButton
+        self.navigationController?.viewControllers[1].navigationItem.leftBarButtonItem = logOutButton
         //navigationItem.title = "MDB Socials: Feed"
-        navigationController?.viewControllers[1].navigationItem.title = "MDB Socials: Feed"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Strawberry Blossom", size: 40)!]
+        self.navigationController?.viewControllers[1].navigationItem.title = "MDB Socials: Feed"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Strawberry Blossom", size: 40)!]
 
     }
     
@@ -117,6 +118,48 @@ class FeedViewController: UIViewController {
     @objc func addNewPost(sender: UIButton!) {
         self.performSegue(withIdentifier: "toNewPost", sender: self)
     }
+    
+    // Pressing Heart Button
+//    @objc func showInterested() {
+//        let navBarHeight = navigationController?.navigationBar.frame.height
+//        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+//        let
+//        firstly {
+//            if post?.interested != nil {
+//                return fetchUsers(uids: post.interested!)
+//            }
+//            }.then { users in
+//                self.interestedModal = InterestedModal(frame: CGRect(x: 0, y: 70, width: self.view.frame.width - 60, height: self.view.frame.height - 75 - (110 - navBarHeight! - statusBarHeight)), users: users)
+//                self.modalView = AKModalView(view: self.interestedModal)
+//                self.modalView.dismissAnimation = .FadeOut
+//                self.navigationController?.view.addSubview(self.modalView)
+//                self.modalView.show()
+//        }
+//    }
+    
+//    func fetchUsers(uids: [String]) -> Promise<[Users]> {
+//        return Promise { fulfill, _ in
+//            let group = DispatchGroup()
+//            var users: [Users] = []
+//            for uid in uids {
+//                group.enter()
+//                firstly {
+//                    return FirebaseSocialAPIClient.fetchUser(id: uid)
+//                    }.then { user in
+//                        users.append(user)
+//                        firstly {
+//                            return Users.getProfilePic(withUrl: user.imageUrl!)
+//                            }.then { image in
+//                                user.image = image
+//                                group.leave()
+//                        }
+//                }
+//            }
+//            group.notify(queue: DispatchQueue.main, execute: { () in
+//                fulfill(users)
+//            })
+//        }
+//    }
     // Setting up the Collection View
     func setupCollectionView() {
         let frame = CGRect(x: 0, y: 50, width: view.frame.width, height: view.frame.height-50)
@@ -162,7 +205,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCell = indexPath.item
-        self.performSegue(withIdentifier: "toDetailFromFeed", sender: self)
+        self.performSegue(withIdentifier: "toDetail", sender: self)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -170,7 +213,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     // Preparing information for segue into the DVC
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toDetailFromFeed" {
+        if segue.identifier == "toDetail" {
             let details = segue.destination as! DetailViewController
             let postInQuestion = posts[selectedCell!]
             details.post = postInQuestion

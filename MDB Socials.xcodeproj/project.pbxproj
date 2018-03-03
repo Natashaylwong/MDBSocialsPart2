@@ -34,6 +34,7 @@
 		696113DD204A604300EFB1AA /* InterestedModalCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696113DC204A604300EFB1AA /* InterestedModalCells.swift */; };
 		696113E0204A75BC00EFB1AA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696113DF204A75BC00EFB1AA /* Utils.swift */; };
 		696113E2204A7C4C00EFB1AA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696113E1204A7C4C00EFB1AA /* LoginViewController.swift */; };
+		698F8251204A999F00E77F20 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F8250204A999F00E77F20 /* MyTabBarController.swift */; };
 		69AE77FF2049DB7A005EBE57 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69AE77FE2049DB7A005EBE57 /* GoogleService-Info.plist */; };
 		69D35F8B203E7E8500976D18 /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D35F8A203E7E8500976D18 /* PostCollectionViewCell.swift */; };
 		A6A27DE2D0EF64FCACA28E03 /* Pods_MDB_SocialsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 888540B83F5C49AB6835A890 /* Pods_MDB_SocialsUITests.framework */; };
@@ -89,6 +90,7 @@
 		696113DC204A604300EFB1AA /* InterestedModalCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedModalCells.swift; sourceTree = "<group>"; };
 		696113DF204A75BC00EFB1AA /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		696113E1204A7C4C00EFB1AA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		698F8250204A999F00E77F20 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		69AE77FE2049DB7A005EBE57 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69D35F8A203E7E8500976D18 /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
 		789D3180FC701B9247D3E08F /* Pods-MDB SocialsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDB SocialsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MDB SocialsTests/Pods-MDB SocialsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			children = (
 				696113DB204A603300EFB1AA /* Cells */,
 				696113D9204A5BDE00EFB1AA /* InterestedModal.swift */,
+				698F8250204A999F00E77F20 /* MyTabBarController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				696113DD204A604300EFB1AA /* InterestedModalCells.swift in Sources */,
 				6915A3E0203D6CDC0007C747 /* Users.swift in Sources */,
 				6915A3DE203D6CB70007C747 /* FirebaseSocialAPIClient.swift in Sources */,
+				698F8251204A999F00E77F20 /* MyTabBarController.swift in Sources */,
 				696113952049F75C00EFB1AA /* RestAPIClient.swift in Sources */,
 				6915A3D2203D41440007C747 /* SignupViewController.swift in Sources */,
 				69D35F8B203E7E8500976D18 /* PostCollectionViewCell.swift in Sources */,

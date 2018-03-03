@@ -21,6 +21,7 @@ class Users: Mappable {
     var id: String?
     var image: UIImage?
     var imageUrl: String?
+//    var interested: [String]?
 
 //    init(id: String, userDict: [String:Any]?) {
 //        self.id = id
@@ -53,6 +54,7 @@ class Users: Mappable {
         password                        <- map["password"]
         id                              <- map["id"]
         imageUrl                        <- map["imageUrl"]
+//        interested                      <- map["eventIds"]
     }
 
     static func getCurrentUser(withId: String) -> Promise<Users> {

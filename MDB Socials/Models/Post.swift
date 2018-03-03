@@ -24,6 +24,7 @@ class Post: Mappable {
     var id: String?
     var image: UIImage?
     var date: String?
+    var location: String?
     
     required init?(map: Map) {
 
@@ -39,6 +40,7 @@ class Post: Mappable {
         id                          <- map["postId"]
         image                       <- map[""]
         date                        <- map["date"]
+        location                    <- map["location"]
     }
     
 //    init(id: String, postDict: [String:Any]?) {

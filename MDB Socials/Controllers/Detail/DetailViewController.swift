@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import CoreLocation
+import MapKit
 
 class DetailViewController: UIViewController {
     var currentUser: Users!
@@ -26,6 +28,12 @@ class DetailViewController: UIViewController {
     var descriptionLabel: UILabel!
     var interestedButton: UIButton!
     var interestCount = 0
+    var mapView: MKMapView!
+    var scrollView: UIScrollView!
+    var directionButton: UIButton!
+    var directionLabel: UILabel!
+
+
     
     var color = Constants.appColor
 
@@ -47,8 +55,65 @@ class DetailViewController: UIViewController {
         setupLabels()
         setupInterested()
         setupImageView()
+        setupMapView()
+        setupScrollView()
+
     
-        }    
+        }
+    func setupMapView() {
+        mapView = MKMapView(frame: CGRect(x: 0, y: view.frame.height + 10, width: view.frame.width, height: view.frame.width - 70))
+        mapView.showsUserLocation = true
+        mapView.layer.borderColor = UIColor.black.cgColor
+        mapView.layer.borderWidth = 2
+        getCoordinates(withBlock: { coordinates in
+            self.mapView.region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            let pin = MKPointAnnotation()
+            pin.coordinate = coordinates
+            self.mapView.addAnnotation(pin)
+        })
+        directionButton = UIButton(frame: CGRect(x: mapView.frame.maxX - 60, y: mapView.frame.maxY + 10, width: 50, height: 50))
+        directionButton.setImage(UIImage(named: "location"), for: .normal)
+        directionButton.addTarget(self, action: #selector(directionButtonPressed), for: .touchUpInside)
+
+        
+        directionLabel = UILabel(frame: CGRect(x: 0, y: mapView.frame.maxY + 30, width: view.frame.width*0.8, height: 50))
+        directionLabel.layer.backgroundColor = UIColor.white.cgColor
+        directionLabel.layer.borderColor = UIColor.black.cgColor
+        directionLabel.layer.borderWidth = 2
+        directionLabel.text = "Get Directions"
+        directionLabel.textAlignment = .center
+        directionLabel.font = UIFont(name: "Strawberry Blossom", size: 30)
+        directionButton = UIButton(frame: CGRect(x: mapView.frame.maxX - 60, y: mapView.frame.maxY + 30, width: 50, height: 50))
+        directionButton.setImage(UIImage(named: "location"), for: .normal)
+        view.addSubview(directionLabel)
+        view.addSubview(directionButton)
+    }
+    
+    @objc func directionButtonPressed() {
+        
+    }
+    
+    func getCoordinates(withBlock: @escaping (CLLocationCoordinate2D) -> ()) {
+        let geocoder = CLGeocoder()
+        var coordinates: CLLocationCoordinate2D!
+       // let address = post.location ?? "2467 Warring Street Berkeley, CA 94720"
+        let address = "2467 Warring Street Berkeley, CA 94720"
+        geocoder.geocodeAddressString(address) { placemarks, error in
+            if error == nil {
+                let placemark = placemarks?.first
+                coordinates = placemark?.location?.coordinate
+                withBlock(coordinates)
+            }
+        }
+    }
+    
+    @objc func getDirections() {
+        getCoordinates() { coordinates in
+            let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinates))
+            mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+        }
+    }
+    
     func setupImageView() {
         eventImageView = UIImageView(frame: CGRect(x: 0, y: 220, width: view.frame.width, height: 250))
         eventImageView.backgroundColor = color
@@ -101,6 +166,24 @@ class DetailViewController: UIViewController {
         interestedLabel = UILabel(frame: CGRect(x: view.frame.width - 110, y: view.frame.height - 60, width: 50, height: 50))
         
         view.addSubview(interestedLabel)
+    }
+    func setupScrollView() {
+        scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        scrollView.addSubview(eventImageView)
+        scrollView.addSubview(posterLabel)
+        scrollView.addSubview(eventNameLabel)
+        scrollView.addSubview(descriptionLabel)
+        scrollView.addSubview(exitButton)
+        scrollView.addSubview(interestedButton)
+        scrollView.addSubview(interestedLabel)
+//        scrollView.addSubview(foaasButton)
+        scrollView.addSubview(mapView)
+        scrollView.addSubview(directionButton)
+//        scrollView.addSubview(calendarButton)
+        scrollView.addSubview(directionLabel)
+        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: directionLabel.frame.maxY+100)
+        
+        view.addSubview(scrollView)
     }
     
     func setupInterested() {

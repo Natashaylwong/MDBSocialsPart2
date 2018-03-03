@@ -35,6 +35,7 @@ class PostCollectionViewCell: UICollectionViewCell {
         interestedButton = UIButton(frame: CGRect(x: self.contentView.frame.width - 50, y: self.contentView.frame.height - 40, width: 30, height: 30))
         interestedButton.setImage(tintedImage, for: .normal)
         interestedButton.tintColor = UIColor.white
+//        interestedButton.addTarget(self, action: #selector(FeedViewController.showInterested), for: .touchUpInside)
         addSubview(interestedButton)
         
         numberInterested = UILabel(frame: CGRect(x: self.contentView.frame.width - 80, y: self.contentView.frame.height - 40, width: 30, height: 30))

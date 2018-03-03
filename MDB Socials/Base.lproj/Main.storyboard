@@ -76,8 +76,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="Gvy-U7-cGB"/>
                     <connections>
-                        <segue destination="0zo-ay-t3a" kind="presentation" identifier="toDetailFromFeed" id="Jir-Qb-hIL"/>
                         <segue destination="lmq-3S-FyW" kind="presentation" identifier="toNewPost" id="39N-GV-bxf"/>
+                        <segue destination="0zo-ay-t3a" kind="presentation" identifier="toDetail" id="Q2D-BK-Z1f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N7y-GM-1FX" userLabel="First Responder" sceneMemberID="firstResponder"/>

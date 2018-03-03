@@ -55,8 +55,9 @@ class FirebaseSocialAPIClient {
     }
     
     // Creating a new post and saving it into Firebase
-    static func createNewPost(name: String, description: String, date: String, imageData: Data, host: String, hostId: String, interested: [String]) {
+    static func createNewPost(name: String, description: String, date: String, imageData: Data, host: String, hostId: String, interested: [String], location: String) {
         let postsRef = Database.database().reference().child("Posts")
+        
         let key = postsRef.childByAutoId().key
         let storage = Storage.storage().reference().child("Event Images/\(key)")
         let metadata = StorageMetadata()
@@ -64,9 +65,10 @@ class FirebaseSocialAPIClient {
         storage.putData(imageData, metadata: metadata).observe(.success) {(snapshot) in print("image stored")
             let interested = [String]()
             let imageURL = snapshot.metadata?.downloadURL()?.absoluteString as! String
-            let newPost = ["name": name, "description": description, "date": date, "imageURL": imageURL, "host": host, "hostId": hostId, "postId": key, "interested": interested ] as [String: Any]
+            let newPost = ["name": name, "description": description, "date": date, "imageURL": imageURL, "host": host, "hostId": hostId, "postId": key, "interested": interested, "location": location ] as [String: Any]
             let childUpdates = ["\(key)": newPost]
             postsRef.updateChildValues(childUpdates)
+        
         }
 //        if let postDict = snapshot.value as? [String: Any] {
 //            postDict["postId"] = snapshot.key
@@ -89,9 +91,8 @@ class FirebaseSocialAPIClient {
         metadata.contentType = "image/jpeg"
         storage.putData(profilePic, metadata: metadata).observe(.success) {(snapshot) in
             print("image stored")
-            print(metadata)
+            let eventIds = [String]()
             let imageURL = snapshot.metadata?.downloadURL()?.absoluteString as! String
-            print(imageURL)
             let newUser = ["name": name, "email": email, "username": username, "id": id, "imageUrl": imageURL] as [String: Any]
             let childUpdates = ["\(id)": newUser]
             usersRef.updateChildValues(childUpdates)

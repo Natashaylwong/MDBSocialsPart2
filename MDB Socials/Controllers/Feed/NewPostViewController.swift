@@ -24,6 +24,7 @@ class NewPostViewController: UIViewController {
     var currentUser: Users!
     var exitButton: UIButton!
     var imageText: UILabel!
+    var locationTextField: UITextField!
     
     var color = Constants.appColor
 
@@ -70,7 +71,7 @@ class NewPostViewController: UIViewController {
         imageViewBackground.alpha = 0.5
         view.addSubview(imageViewBackground)
         
-        nameEventTextField = UITextField(frame: CGRect(x: 10, y: 0.6 * UIScreen.main.bounds.height - 50, width: UIScreen.main.bounds.width - 20, height: 40))
+        nameEventTextField = UITextField(frame: CGRect(x: 10, y: 0.6 * UIScreen.main.bounds.height - 80, width: UIScreen.main.bounds.width - 20, height: 40))
         nameEventTextField.adjustsFontSizeToFitWidth = true
         nameEventTextField.font = UIFont(name: "Strawberry Blossom", size: 30)
         nameEventTextField.placeholder = "Event Name"
@@ -84,7 +85,7 @@ class NewPostViewController: UIViewController {
         nameEventTextField.textColor = UIColor.black
         view.addSubview(nameEventTextField)
         
-        descriptionTextField = UITextField(frame: CGRect(x: 10, y: 0.6 * UIScreen.main.bounds.height, width: UIScreen.main.bounds.width - 20, height: 60))
+        descriptionTextField = UITextField(frame: CGRect(x: 10, y: 0.6 * UIScreen.main.bounds.height - 30, width: UIScreen.main.bounds.width - 20, height: 40))
         descriptionTextField.adjustsFontSizeToFitWidth = true
         descriptionTextField.font = UIFont(name: "Strawberry Blossom", size: 30)
         descriptionTextField.placeholder = "Short Description of the Event"
@@ -96,9 +97,22 @@ class NewPostViewController: UIViewController {
         descriptionTextField.layer.masksToBounds = true
         descriptionTextField.textColor = UIColor.black
         view.addSubview(descriptionTextField)
+        
+        locationTextField = UITextField(frame: CGRect(x: 10, y: 0.6 * UIScreen.main.bounds.height + 20, width: UIScreen.main.bounds.width - 20, height: 40))
+        locationTextField.adjustsFontSizeToFitWidth = true
+        locationTextField.font = UIFont(name: "Strawberry Blossom", size: 30)
+        locationTextField.placeholder = "Location of the Event"
+        locationTextField.textAlignment = .center
+        locationTextField.borderStyle = .roundedRect
+        locationTextField.layer.borderColor = color?.cgColor
+        locationTextField.layer.backgroundColor = UIColor.white.cgColor
+        locationTextField.layer.borderWidth = 1.0
+        locationTextField.layer.masksToBounds = true
+        locationTextField.textColor = UIColor.black
+        view.addSubview(locationTextField)
     }
     func setupEventImageView() {
-        imagePost = UIImageView(frame: CGRect(x: 25, y: 60, width: view.frame.width - 50, height: 200))
+        imagePost = UIImageView(frame: CGRect(x: 25, y: 60, width: view.frame.width - 50, height: 180))
         imagePost.layer.backgroundColor = UIColor.white.cgColor
         imagePost.layer.borderColor = color?.cgColor
         imagePost.layer.borderWidth = 2
@@ -107,11 +121,11 @@ class NewPostViewController: UIViewController {
         imageText.textAlignment = .center
         imageText.font = UIFont(name: "Strawberry Blossom", size: 40)
         imageText.textColor = UIColor(red: 0.8078, green: 0.8078, blue: 0.8078, alpha: 1.0)
-        imagePost.layer.cornerRadius = 5.0
+        imagePost.layer.cornerRadius = 20
         imagePost.contentMode = .scaleToFill
         imagePost.clipsToBounds = true
         
-        selectFromLibraryButton = UIButton(frame: CGRect(x: 50, y: 280, width: UIScreen.main.bounds.width * 0.3, height: 40))
+        selectFromLibraryButton = UIButton(frame: CGRect(x: 50, y: 260, width: UIScreen.main.bounds.width * 0.3, height: 40))
         selectFromLibraryButton.titleLabel?.font = UIFont(name: "Strawberry Blossom", size: 35)
         selectFromLibraryButton.setTitle("Library", for: .normal)
         selectFromLibraryButton.layer.borderColor =  color?.cgColor
@@ -121,7 +135,7 @@ class NewPostViewController: UIViewController {
         selectFromLibraryButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
         view.bringSubview(toFront: selectFromLibraryButton)
         
-        selectFromCameraButton = UIButton(frame: CGRect(x: 200, y: 280, width: UIScreen.main.bounds.width * 0.3, height: 40))
+        selectFromCameraButton = UIButton(frame: CGRect(x: 200, y: 260, width: UIScreen.main.bounds.width * 0.3, height: 40))
         selectFromCameraButton.titleLabel?.font = UIFont(name: "Strawberry Blossom", size: 35)
         selectFromCameraButton.setTitle("Camera", for: .normal)
         selectFromCameraButton.layer.borderColor =  color?.cgColor
@@ -184,6 +198,7 @@ class NewPostViewController: UIViewController {
         let currentUser = self.currentUser
         let description = descriptionTextField.text!
         let name = nameEventTextField.text!
+        let location = locationTextField.text!
         let date = datePicker.date
         let dateFormatter: DateFormatter = DateFormatter()
         // Set date format
@@ -191,12 +206,13 @@ class NewPostViewController: UIViewController {
         // Apply date format
         let selectedDate: String = dateFormatter.string(from: date)
 
-        if imagePost.image == nil || description == "" || name == "" {
+        if imagePost.image == nil || description == "" || name == "" || location == "" {
             let alert = UIAlertController(title: "Not all information inputted", message: "Unable to create a new post", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
             let currentUser = self.currentUser
+            print("\(currentUser)")
             let imageData = UIImageJPEGRepresentation(imagePost.image!, 0.9)
             let description = descriptionTextField.text!
             print("\(description)")
@@ -206,15 +222,14 @@ class NewPostViewController: UIViewController {
             print("\(date)")
             let dateFormatter: DateFormatter = DateFormatter()
             let interested = ["help"]
-            
+//            var eventIds = currentUser?.interested
             // Set date format
             dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-           
             // Apply date format
             let selectedDate: String = dateFormatter.string(from: date)
-            print("Selected value \(selectedDate)")
+            print("\(selectedDate)")
             
-            FirebaseSocialAPIClient.createNewPost(name: name, description: description, date: selectedDate, imageData: imageData!, host: (currentUser?.name)!, hostId: (currentUser?.id)!, interested: interested)
+            FirebaseSocialAPIClient.createNewPost(name: name, description: description, date: selectedDate, imageData: imageData!, host: (currentUser?.name)!, hostId: (currentUser?.id)!, interested: interested, location: location)
             
             self.dismiss(animated: true, completion: nil)
         }
