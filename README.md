@@ -2,7 +2,7 @@
 # MDBSocialsPart2
 
 
-Part I - Refactor
+#Part I - Refactor
 Refactor your project to use the following libraries:
  - ChameleonFramework - all colors used in the project should be specified using methods
  from this library (such as the constructor for UIColor that takes a hex).
@@ -25,7 +25,8 @@ Refactor your project to use the following libraries:
  - Resources - font files and other resources go in here. You should also create a constants file that contains a struct with commonly used values such as appColor or apiUrl.
  - Style - update your codebase to follow the style guidelines outlined here: https://github.com/raywenderlich/swift-style-guide . The more you do the better. At the very least, please organize your code using extensions and do not use self unless required.
  - Code Organization - organize functionality in ViewController classes and AppDelegates using extensions. Create multiple files for a single ViewController that each have a particular functionality associated with them. Ex: MenuViewController-CollectionView.swift.
-Part II - New Features
+ 
+#Part II - New Features
 Implement the following new features in your project:
  - Profile Picture - have the user upload a profile picture during signup. This should be
  stored in Firebase storage. An imageUrl should be stored in the Firebase Database in the
@@ -36,7 +37,8 @@ Implement the following new features in your project:
  - Location - add a map to your Event Detail Screen that shows the location of the event. You will utilize MapKit & CoreLocation to do this. Please refer to this week’s resources to learn the concept. Also add a button that automatically opens Apple Maps and provides directions to the location of the event. Hint: this is only a few lines of code.
 
  - Sort Feed - make sure your main feed only shows upcoming events, and sort them so that the event coming up the soonest is at the top.
-Part III - Open Ended Feature
+ 
+#Part III - Open Ended Feature
 Go find a RESTful API online that you think would be useful to this project. Design a feature around it and integrate it. This is completely open ended. The only requirements are that you should use Alamofire to make at least 1 REST API call in your project. Please think of a feature that would actually be useful. If you want your project to be chosen as the one we all use, then this is one of the best places to differentiate it! This part should also help build you as a developer. Looking up tools and being able to learn how to use them from their documentation is a very important skill for any engineer.
 
 
