@@ -46,6 +46,9 @@ class DetailViewController: UIViewController {
     var rsvp: UIButton!
     var modalView: AKModalView!
     var interestedModal: InterestedModal!
+    var coordinates: CLLocationCoordinate2D!
+    var lyftInfoLabel: UILabel!
+
 
 
     
@@ -96,11 +99,35 @@ class DetailViewController: UIViewController {
         setupMapView()
         setupDate()
         setupWeather()
+        setupLyftLabel()
+        queryLyft()
         setupScrollView()
-        
-
-    
         }
+    
+    func queryLyft(){
+        let eventLocation = CLLocationCoordinate2DMake(37.8719, 122.2585)
+        if viewController.currentLocation != nil {
+            LyftHelper.getRideEstimate(pickup: coordinates, dropoff: eventLocation) { costEstimate in
+                self.lyftInfoLabel.text = "A Lyft ride will cost $" + String(describing: costEstimate.estimate!.maxEstimate.amount) + " from your location."
+                self.lyftInfoLabel.font = UIFont(name: "Strawberry Blossom", size: 30)
+            }
+        } else {
+            print("Cant get current location")
+        }
+    }
+    
+    func setupLyftLabel() {
+        lyftInfoLabel = UILabel(frame: CGRect(x: 0, y: weatherLabel.frame.maxY  + 40, width: view.frame.width, height: 90))
+        lyftInfoLabel.layer.borderColor = UIColor.black.cgColor
+        lyftInfoLabel.layer.borderWidth = 2
+        lyftInfoLabel.backgroundColor = UIColor.white
+        lyftInfoLabel.textAlignment = .center
+        lyftInfoLabel.font = UIFont(name: "Strawberry Blossom", size: 30)
+        lyftInfoLabel.lineBreakMode = .byWordWrapping
+        lyftInfoLabel.numberOfLines = 0
+        view.addSubview(lyftInfoLabel)
+    }
+    
     func setupDate() {
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
@@ -163,7 +190,7 @@ class DetailViewController: UIViewController {
         weatherLabel = UILabel(frame: CGRect(x: 0, y: directionLabel.frame.maxY + 30, width: view.frame.width, height: 40))
         weatherLabel.layer.borderColor = UIColor.black.cgColor
         weatherLabel.layer.borderWidth = 2
-        weatherLabel.text = "Weather Forecase: "
+        weatherLabel.text = "Weather Forecast: "
         weatherLabel.backgroundColor = UIColor.white
         weatherLabel.textAlignment = .center
         weatherLabel.font = UIFont(name: "Strawberry Blossom", size: 30)
@@ -188,8 +215,9 @@ class DetailViewController: UIViewController {
     
     func getCoordinates(withBlock: @escaping (CLLocationCoordinate2D) -> ()) {
         let geocoder = CLGeocoder()
-        var coordinates: CLLocationCoordinate2D!
        // let address = post.location ?? "2467 Warring Street Berkeley, CA 94720"
+//        var coordinates: CLLocationCoordinate2D!
+
         let address = post.location ?? "2467 Warring Street Berkeley, CA 94720"
         geocoder.geocodeAddressString(address) { placemarks, error in
             if error == nil {
@@ -198,9 +226,6 @@ class DetailViewController: UIViewController {
                 withBlock(coordinates)
             }
         }
-//        latitude = coordinates.latitude
-//        longitude = coordinates.longitude
-        
     }
     
     @objc func getDirections() {

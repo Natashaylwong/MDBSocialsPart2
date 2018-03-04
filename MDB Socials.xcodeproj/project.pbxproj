@@ -26,6 +26,7 @@
 		6915A3E0203D6CDC0007C747 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6915A3DF203D6CDC0007C747 /* Users.swift */; };
 		6915A3E2203D6CED0007C747 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6915A3E1203D6CED0007C747 /* Post.swift */; };
 		69241F54204BA6D400F11E16 /* DarkSkyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69241F53204BA6D400F11E16 /* DarkSkyAPI.swift */; };
+		69241F56204BD3FA00F11E16 /* LyftAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69241F55204BD3FA00F11E16 /* LyftAPI.swift */; };
 		696113912049E57D00EFB1AA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696113902049E57D00EFB1AA /* Constants.swift */; };
 		696113932049F6A400EFB1AA /* RestAPIClient-User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696113922049F6A400EFB1AA /* RestAPIClient-User.swift */; };
 		696113952049F75C00EFB1AA /* RestAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696113942049F75C00EFB1AA /* RestAPIClient.swift */; };
@@ -83,6 +84,7 @@
 		6915A3DF203D6CDC0007C747 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		6915A3E1203D6CED0007C747 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		69241F53204BA6D400F11E16 /* DarkSkyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSkyAPI.swift; sourceTree = "<group>"; };
+		69241F55204BD3FA00F11E16 /* LyftAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyftAPI.swift; sourceTree = "<group>"; };
 		696113902049E57D00EFB1AA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		696113922049F6A400EFB1AA /* RestAPIClient-User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RestAPIClient-User.swift"; sourceTree = "<group>"; };
 		696113942049F75C00EFB1AA /* RestAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAPIClient.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 			children = (
 				696113DF204A75BC00EFB1AA /* Utils.swift */,
 				69241F53204BA6D400F11E16 /* DarkSkyAPI.swift */,
+				69241F55204BD3FA00F11E16 /* LyftAPI.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -681,6 +684,7 @@
 				6915A3E2203D6CED0007C747 /* Post.swift in Sources */,
 				696113A1204A51B700EFB1AA /* AKModalViewController.swift in Sources */,
 				696113912049E57D00EFB1AA /* Constants.swift in Sources */,
+				69241F56204BD3FA00F11E16 /* LyftAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
