@@ -15,7 +15,6 @@ class InterestedModal: UIView {
     var tableView: UITableView!
     var users: [Users]!
     var color = Constants.appColor
-
     
     init(frame: CGRect, users: [Users]) {
         super.init(frame: frame)
@@ -35,10 +34,10 @@ class InterestedModal: UIView {
     // MARK: Creation functions
     
     func setupLabel() {
-        label = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: 40))
+        label = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: 70))
         label.text = "Interested Users:"
+        label.font = UIFont(name: "Strawberry Blossom", size: 60)
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 25)
         label.textColor = .white
         label.backgroundColor = color
         addSubview(label)
@@ -58,7 +57,7 @@ class InterestedModal: UIView {
 
 extension InterestedModal: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 100
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,7 +79,7 @@ extension InterestedModal: UITableViewDelegate, UITableViewDataSource {
         let user = users[indexPath.row]
         
         cell.nameLabel.text = user.name
-        cell.usernameLabel.text = user.username
+   //     cell.usernameLabel.text = user.username
         cell.userImageView.image = user.image
     }
 }

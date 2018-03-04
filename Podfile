@@ -15,6 +15,7 @@ target 'MDB Socials' do
   pod "PromiseKit", "~> 4.0"
   pod 'PromiseKit/Alamofire'
   pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
+  pod 'LyftSDK/API'
   
 
   # Pods for MDB Socials

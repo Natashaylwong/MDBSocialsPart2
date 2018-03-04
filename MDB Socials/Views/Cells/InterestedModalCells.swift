@@ -20,7 +20,7 @@ class InterestedModalCells: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         var font = UIFont(name: "Strawberry Blossom", size: 50)
-        userImageView = UIImageView(frame: CGRect(x: 10, y: 5, width: 60, height: 60))
+        userImageView = UIImageView(frame: CGRect(x: 15, y: 10, width: 60, height: 60))
         userImageView.clipsToBounds = true
         userImageView.layer.cornerRadius = 30
         addSubview(userImageView)
@@ -30,7 +30,7 @@ class InterestedModalCells: UITableViewCell {
 //        usernameLabel.font = UIFont.systemFont(ofSize: 18)
 //        addSubview(usernameLabel)
         
-        nameLabel = UILabel(frame: CGRect(x: 90, y: userImageView.frame.maxY + 50, width: 200, height: 50))
+        nameLabel = UILabel(frame: CGRect(x: 100, y: 10, width: 200, height: 50))
         nameLabel.textColor = UIColor.gray
         nameLabel.font = font
         addSubview(nameLabel)

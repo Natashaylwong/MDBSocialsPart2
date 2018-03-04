@@ -25,6 +25,18 @@ class FirebaseSocialAPIClient {
         })
     }
     
+    static func fetchUsers(withBlock: @escaping ([Users]) -> ()) {
+        let ref = Database.database().reference()
+        ref.child("Users").observe(.childAdded, with: { (snapshot) in
+            let json = JSON(snapshot.value)
+            if let dict = json.dictionaryObject{
+                if let user = Users(JSON: dict){
+                    withBlock([user])
+                }
+            }
+        })
+    }
+    
     // Fetching all users for the modal view
     static func fetchUsersModal(withBlock: @escaping ([Users]) -> ()) {
         let ref = Database.database().reference()

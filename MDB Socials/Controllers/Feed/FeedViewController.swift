@@ -43,6 +43,7 @@ class FeedViewController: UIViewController {
     var navBar: UINavigationBar!
     var color = Constants.appColor
     var interestedModal: InterestedModal!
+    var oldPosts: [Post] = []
 
 //    var orderedPost:
 
@@ -50,7 +51,6 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         activityIndicator.startAnimating()
-//        delegate = self.MyTabBarController
         self.setupNavBar()
         self.setupCollectionView()
         Users.getCurrentUser(withId: (Auth.auth().currentUser?.uid)!).then{(cUser) in
@@ -62,6 +62,8 @@ class FeedViewController: UIViewController {
 //            if posts.count > 1 {
 //                posts = Utils.sortPosts(posts: posts)
 //            }
+            self.sortDate()
+            
             for post in posts {
                 Post.getEventPic(withUrl: (post.imageUrl)!).then { img in
                     post.image = img
@@ -85,31 +87,47 @@ class FeedViewController: UIViewController {
         view.endEditing(true)
         super.touchesBegan(touches, with: event)
     }
+    
+    func sortDate() {
+        self.posts.sort { (post1, post2) -> Bool in
+            return post1.date! > post2.date!
+        }
+    }
 
     
     func setupNavBar() {
+//        self.navigationController?.navigationBar.tintColor = UIColor.white;
+//        self.navigationController?.navigationBar.barTintColor = color
+//
+////        let addButton = UIBarButtonItem(image: UIImage(named: "adds"), style: .done, target: self, action: #selector(addButtonPressed))
+////        navigationItem.rightBarButtonItem  = addButton
+//        self.tabBarController?.viewControllers![0].navigationItem.rightBarButtonItem = addButton
+//
+//        let logOutButton = UIBarButtonItem(image: UIImage(named: "logout"), style: .done, target: self, action: #selector(logOut))
+//        navigationItem.leftBarButtonItem  = logOutButton
+////        self.tabBarController?.viewControllers![0].navigationItem.leftBarButtonItem = logOutButton
+//        navigationItem.title = "MDB Socials: Feed"
+//   //     self.tabBarController?.viewControllers![0].navigationItem.title = "MDB Socials: Feed"
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Strawberry Blossom", size: 40)!]
         self.navigationController?.navigationBar.tintColor = UIColor.white;
         self.navigationController?.navigationBar.barTintColor = color
         
         let addButton = UIBarButtonItem(image: UIImage(named: "adds"), style: .done, target: self, action: #selector(addButtonPressed))
-        navigationItem.rightBarButtonItem  = addButton
-//        self.tabBarController?.viewControllers![0].navigationItem.rightBarButtonItem = addButton
-
+        self.navigationController?.viewControllers[1].navigationItem.rightBarButtonItem = addButton
+        
         let logOutButton = UIBarButtonItem(image: UIImage(named: "logout"), style: .done, target: self, action: #selector(logOut))
-        navigationItem.leftBarButtonItem  = logOutButton
-//        self.tabBarController?.viewControllers![0].navigationItem.leftBarButtonItem = logOutButton
-        navigationItem.title = "MDB Socials: Feed"
-   //     self.tabBarController?.viewControllers![0].navigationItem.title = "MDB Socials: Feed"
+        self.navigationController?.viewControllers[1].navigationItem.leftBarButtonItem = logOutButton
+        self.navigationController?.viewControllers[1].navigationItem.title = "MDB Socials: Feed"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Strawberry Blossom", size: 40)!]
 
     }
     
     // Logging out the current user
     @objc func logOut() {
-//        UserAuthHelper.logOut {
-//            self.dismiss(animated: true, completion: nil)
-//            self.navigationController!.popToRootViewController(animated: true)
-//        }
+        UserAuthHelper.logOut {
+            self.dismiss(animated: true, completion: nil)
+            self.navigationController!.popToRootViewController(animated: true)
+        }
         
     }
 
@@ -122,47 +140,6 @@ class FeedViewController: UIViewController {
         self.performSegue(withIdentifier: "toNewPost", sender: self)
     }
     
-    // Pressing Heart Button
-//    @objc func showInterested() {
-//        let navBarHeight = navigationController?.navigationBar.frame.height
-//        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-//        let
-//        firstly {
-//            if post?.interested != nil {
-//                return fetchUsers(uids: post.interested!)
-//            }
-//            }.then { users in
-//                self.interestedModal = InterestedModal(frame: CGRect(x: 0, y: 70, width: self.view.frame.width - 60, height: self.view.frame.height - 75 - (110 - navBarHeight! - statusBarHeight)), users: users)
-//                self.modalView = AKModalView(view: self.interestedModal)
-//                self.modalView.dismissAnimation = .FadeOut
-//                self.navigationController?.view.addSubview(self.modalView)
-//                self.modalView.show()
-//        }
-//    }
-    
-//    func fetchUsers(uids: [String]) -> Promise<[Users]> {
-//        return Promise { fulfill, _ in
-//            let group = DispatchGroup()
-//            var users: [Users] = []
-//            for uid in uids {
-//                group.enter()
-//                firstly {
-//                    return FirebaseSocialAPIClient.fetchUser(id: uid)
-//                    }.then { user in
-//                        users.append(user)
-//                        firstly {
-//                            return Users.getProfilePic(withUrl: user.imageUrl!)
-//                            }.then { image in
-//                                user.image = image
-//                                group.leave()
-//                        }
-//                }
-//            }
-//            group.notify(queue: DispatchQueue.main, execute: { () in
-//                fulfill(users)
-//            })
-//        }
-//    }
     // Setting up the Collection View
     func setupCollectionView() {
         let frame = CGRect(x: 0, y: 50, width: view.frame.width, height: view.frame.height-50)

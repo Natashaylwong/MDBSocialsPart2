@@ -25,7 +25,7 @@
 		6915A3DE203D6CB70007C747 /* FirebaseSocialAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6915A3DD203D6CB70007C747 /* FirebaseSocialAPIClient.swift */; };
 		6915A3E0203D6CDC0007C747 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6915A3DF203D6CDC0007C747 /* Users.swift */; };
 		6915A3E2203D6CED0007C747 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6915A3E1203D6CED0007C747 /* Post.swift */; };
-		69241F50204B669B00F11E16 /* logoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69241F4F204B669B00F11E16 /* logoutDelegate.swift */; };
+		69241F54204BA6D400F11E16 /* DarkSkyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69241F53204BA6D400F11E16 /* DarkSkyAPI.swift */; };
 		696113912049E57D00EFB1AA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696113902049E57D00EFB1AA /* Constants.swift */; };
 		696113932049F6A400EFB1AA /* RestAPIClient-User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696113922049F6A400EFB1AA /* RestAPIClient-User.swift */; };
 		696113952049F75C00EFB1AA /* RestAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696113942049F75C00EFB1AA /* RestAPIClient.swift */; };
@@ -82,7 +82,7 @@
 		6915A3DD203D6CB70007C747 /* FirebaseSocialAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSocialAPIClient.swift; sourceTree = "<group>"; };
 		6915A3DF203D6CDC0007C747 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		6915A3E1203D6CED0007C747 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		69241F4F204B669B00F11E16 /* logoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logoutDelegate.swift; sourceTree = "<group>"; };
+		69241F53204BA6D400F11E16 /* DarkSkyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSkyAPI.swift; sourceTree = "<group>"; };
 		696113902049E57D00EFB1AA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		696113922049F6A400EFB1AA /* RestAPIClient-User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RestAPIClient-User.swift"; sourceTree = "<group>"; };
 		696113942049F75C00EFB1AA /* RestAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAPIClient.swift; sourceTree = "<group>"; };
@@ -307,7 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				696113DF204A75BC00EFB1AA /* Utils.swift */,
-				69241F4F204B669B00F11E16 /* logoutDelegate.swift */,
+				69241F53204BA6D400F11E16 /* DarkSkyAPI.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -664,11 +664,11 @@
 				696113DD204A604300EFB1AA /* InterestedModalCells.swift in Sources */,
 				6915A3E0203D6CDC0007C747 /* Users.swift in Sources */,
 				6915A3DE203D6CB70007C747 /* FirebaseSocialAPIClient.swift in Sources */,
+				69241F54204BA6D400F11E16 /* DarkSkyAPI.swift in Sources */,
 				698F8251204A999F00E77F20 /* MyTabBarController.swift in Sources */,
 				696113952049F75C00EFB1AA /* RestAPIClient.swift in Sources */,
 				6915A3D2203D41440007C747 /* SignupViewController.swift in Sources */,
 				69D35F8B203E7E8500976D18 /* PostCollectionViewCell.swift in Sources */,
-				69241F50204B669B00F11E16 /* logoutDelegate.swift in Sources */,
 				696113E0204A75BC00EFB1AA /* Utils.swift in Sources */,
 				69611398204A2AE900EFB1AA /* MyEventsViewController.swift in Sources */,
 				6915A39C203D37570007C747 /* AppDelegate.swift in Sources */,

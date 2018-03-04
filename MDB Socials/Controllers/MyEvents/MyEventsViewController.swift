@@ -85,8 +85,8 @@ class MyEventsViewController: UIViewController {
         //        navigationItem.leftBarButtonItem  = logOutButton
 //            navigationController?.viewControllers[1].navigationItem.leftBarButtonItem = logOutButton
         //navigationItem.title = "MDB Socials: Feed"
-        self.tabBarController?.navigationController?.viewControllers[1].navigationItem.title = "MDB Socials: My Events"
-//        self.tabBarController.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Strawberry Blossom", size: 35)!]
+        self.navigationController?.viewControllers[1].navigationItem.title = "MDB Socials: My Events"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Strawberry Blossom", size: 35)!]
         
     //    self.navigationController?.viewControllers[1].navigationItem.leftBarButtonItem =
     }
