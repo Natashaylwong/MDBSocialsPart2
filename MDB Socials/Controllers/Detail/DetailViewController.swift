@@ -106,13 +106,10 @@ class DetailViewController: UIViewController {
     
     func queryLyft(){
         let eventLocation = CLLocationCoordinate2DMake(37.8719, 122.2585)
-        if viewController.currentLocation != nil {
-            LyftHelper.getRideEstimate(pickup: coordinates, dropoff: eventLocation) { costEstimate in
-                self.lyftInfoLabel.text = "A Lyft ride will cost $" + String(describing: costEstimate.estimate!.maxEstimate.amount) + " from your location."
-                self.lyftInfoLabel.font = UIFont(name: "Strawberry Blossom", size: 30)
-            }
-        } else {
-            print("Cant get current location")
+        LyftHelper.getRideEstimate(pickup: coordinates, dropoff: eventLocation) { costEstimate in
+            self.lyftInfoLabel.text = "A Lyft ride will cost $" + String(describing: costEstimate.estimate!.maxEstimate.amount) + " from your location."
+            self.lyftInfoLabel.font = UIFont(name: "Strawberry Blossom", size: 30)
+
         }
     }
     
@@ -222,8 +219,8 @@ class DetailViewController: UIViewController {
         geocoder.geocodeAddressString(address) { placemarks, error in
             if error == nil {
                 let placemark = placemarks?.first
-                coordinates = placemark?.location?.coordinate
-                withBlock(coordinates)
+                self.coordinates = placemark?.location?.coordinate
+                withBlock(self.coordinates)
             }
         }
     }
@@ -323,6 +320,7 @@ class DetailViewController: UIViewController {
         scrollView.addSubview(directionButton)
         scrollView.addSubview(directionLabel)
         scrollView.addSubview(weatherLabel)
+        scrollView.addSubview(lyftInfoLabel)
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: weatherLabel.frame.maxY+100)
         
         view.addSubview(scrollView)
