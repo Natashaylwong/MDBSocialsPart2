@@ -47,7 +47,7 @@ class DetailViewController: UIViewController {
     var modalView: AKModalView!
     var interestedModal: InterestedModal!
     var coordinates: CLLocationCoordinate2D!
-    var lyftInfoLabel: UILabel!
+//    var lyftInfoLabel: UILabel!
 
 
 
@@ -99,31 +99,31 @@ class DetailViewController: UIViewController {
         setupMapView()
         setupDate()
         setupWeather()
-        setupLyftLabel()
-        queryLyft()
+//        setupLyftLabel()
+//        queryLyft()
         setupScrollView()
         }
+//
+//    func queryLyft(){
+//        let eventLocation = CLLocationCoordinate2DMake(37.8719, 122.2585)
+//        LyftHelper.getRideEstimate(pickup: coordinates, dropoff: eventLocation) { costEstimate in
+//            self.lyftInfoLabel.text = "A Lyft ride will cost $" + String(describing: costEstimate.estimate!.maxEstimate.amount) + " from your location."
+//            self.lyftInfoLabel.font = UIFont(name: "Strawberry Blossom", size: 30)
+//
+//        }
+//    }
     
-    func queryLyft(){
-        let eventLocation = CLLocationCoordinate2DMake(37.8719, 122.2585)
-        LyftHelper.getRideEstimate(pickup: coordinates, dropoff: eventLocation) { costEstimate in
-            self.lyftInfoLabel.text = "A Lyft ride will cost $" + String(describing: costEstimate.estimate!.maxEstimate.amount) + " from your location."
-            self.lyftInfoLabel.font = UIFont(name: "Strawberry Blossom", size: 30)
-
-        }
-    }
-    
-    func setupLyftLabel() {
-        lyftInfoLabel = UILabel(frame: CGRect(x: 0, y: weatherLabel.frame.maxY  + 40, width: view.frame.width, height: 90))
-        lyftInfoLabel.layer.borderColor = UIColor.black.cgColor
-        lyftInfoLabel.layer.borderWidth = 2
-        lyftInfoLabel.backgroundColor = UIColor.white
-        lyftInfoLabel.textAlignment = .center
-        lyftInfoLabel.font = UIFont(name: "Strawberry Blossom", size: 30)
-        lyftInfoLabel.lineBreakMode = .byWordWrapping
-        lyftInfoLabel.numberOfLines = 0
-        view.addSubview(lyftInfoLabel)
-    }
+//    func setupLyftLabel() {
+//        lyftInfoLabel = UILabel(frame: CGRect(x: 0, y: weatherLabel.frame.maxY  + 40, width: view.frame.width, height: 90))
+//        lyftInfoLabel.layer.borderColor = UIColor.black.cgColor
+//        lyftInfoLabel.layer.borderWidth = 2
+//        lyftInfoLabel.backgroundColor = UIColor.white
+//        lyftInfoLabel.textAlignment = .center
+//        lyftInfoLabel.font = UIFont(name: "Strawberry Blossom", size: 30)
+//        lyftInfoLabel.lineBreakMode = .byWordWrapping
+//        lyftInfoLabel.numberOfLines = 0
+//        view.addSubview(lyftInfoLabel)
+//    }
     
     func setupDate() {
         let dateFormatter: DateFormatter = DateFormatter()
@@ -320,7 +320,7 @@ class DetailViewController: UIViewController {
         scrollView.addSubview(directionButton)
         scrollView.addSubview(directionLabel)
         scrollView.addSubview(weatherLabel)
-        scrollView.addSubview(lyftInfoLabel)
+//        scrollView.addSubview(lyftInfoLabel)
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: weatherLabel.frame.maxY+100)
         
         view.addSubview(scrollView)
