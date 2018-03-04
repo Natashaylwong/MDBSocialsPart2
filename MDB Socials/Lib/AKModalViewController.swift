@@ -8,7 +8,6 @@
 
 import UIKit
 import Spring
-
 public enum ShowAnimation {
     case SlideFromBottom
     case SlideFromTop

@@ -85,6 +85,7 @@
 		6915A3E1203D6CED0007C747 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		69241F53204BA6D400F11E16 /* DarkSkyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSkyAPI.swift; sourceTree = "<group>"; };
 		69241F55204BD3FA00F11E16 /* LyftAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyftAPI.swift; sourceTree = "<group>"; };
+		69241F59204BDA1300F11E16 /* Strawberry Blossom.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Strawberry Blossom.ttf"; sourceTree = "<group>"; };
 		696113902049E57D00EFB1AA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		696113922049F6A400EFB1AA /* RestAPIClient-User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RestAPIClient-User.swift"; sourceTree = "<group>"; };
 		696113942049F75C00EFB1AA /* RestAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAPIClient.swift; sourceTree = "<group>"; };
@@ -169,6 +170,7 @@
 		6915A39A203D37570007C747 /* MDB Socials */ = {
 			isa = PBXGroup;
 			children = (
+				69241F58204BDA0600F11E16 /* Resources */,
 				696113DE204A75A900EFB1AA /* Helpers */,
 				6915A3E9203D6DC40007C747 /* Clients */,
 				6961139D204A513B00EFB1AA /* Lib */,
@@ -268,6 +270,14 @@
 				696113942049F75C00EFB1AA /* RestAPIClient.swift */,
 			);
 			path = Clients;
+			sourceTree = "<group>";
+		};
+		69241F58204BDA0600F11E16 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				69241F59204BDA1300F11E16 /* Strawberry Blossom.ttf */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		69611396204A2AC300EFB1AA /* MyEvents */ = {
