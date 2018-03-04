@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "133A6F15AE66DF1DA7F77217D04109E7"
-               BlueprintName = "Spring"
+               BlueprintIdentifier = "D2E4B61AA750B31E9B733F9D8DD99B2B"
+               BlueprintName = "LyftSDK"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Spring.framework">
+               BuildableName = "LyftSDK.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
