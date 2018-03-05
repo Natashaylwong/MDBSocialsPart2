@@ -63,10 +63,6 @@ class MyEventsViewController: UIViewController {
                             
                         }
                 }
-                //                let imageUrl = post.imageUrl
-                //                Post.getEventPic(withUrl: imageUrl) {
-                //                    self.postCollectionView.reloadData()
-                //                }
             }
             activityIndicator.stopAnimating()
             
