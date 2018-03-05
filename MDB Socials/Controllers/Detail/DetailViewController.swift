@@ -40,22 +40,21 @@ class DetailViewController: UIViewController {
     var rsvpUsers: [Users] = []
     let currentDateTime = Date()
     var currentDate: String!
-    var weatherData = DarkSkyAPI()
     var weatherLabel: UILabel!
+    var dateLabel: UILabel!
+    
     
     var rsvp: UIButton!
     var modalView: AKModalView!
     var interestedModal: InterestedModal!
     var coordinates: CLLocationCoordinate2D!
 //    var lyftInfoLabel: UILabel!
-
-
-
     
     var color = Constants.appColor
 
     
     override func viewDidAppear(_ animated: Bool) {
+
         self.id = (Auth.auth().currentUser?.uid)!
         if interested == nil {
             interestedLabel.text = "\(0)"
@@ -139,20 +138,23 @@ class DetailViewController: UIViewController {
         let postHourSubstring = post.date?.prefix(13)
         let currDaySubstring = currentDate.prefix(5)
         let postDaySubstring = post.date?.prefix(5)
-        
-        weatherData.getWeather()
-        if currWeekSubstring.prefix(2) == postWeekSubstring?.prefix(2) {
-            if currDaySubstring == postDaySubstring {
-                if currHourSubstring == postHourSubstring {
-                    weatherLabel.text = "Weather Forecast: " + weatherData.minutelySummary
+        var weatherData = Alamofire.request("https://api.darksky.net/forecast/50b32f864695d836f5360d46bdfb6a61/" + String(37.8716) + "," + String(122.2727)).responseJSON { response in
+            if let json = response.result.value {
+                let weatherData = JSON(json)
+                if currWeekSubstring.prefix(2) == postWeekSubstring?.prefix(2) {
+                    if currDaySubstring == postDaySubstring {
+                        if currHourSubstring == postHourSubstring {
+                            self.weatherLabel.text = "Weather Forecast: " +  "Chilly"
+                        } else {
+                            self.weatherLabel.text = "Weather Forecast: " + weatherData["hourly"]["summary"].stringValue
+                        }
+                    } else {
+                        self.weatherLabel.text = "Weather Forecast: " + weatherData["daily"]["summary"].stringValue
+                    }
                 } else {
-                    weatherLabel.text = "Weather Forecast: " + weatherData.hourlySummary
+                    self.weatherLabel.text = "Weather Forecast: Unpredicted"
                 }
-            } else {
-                weatherLabel.text = "Weather Forecast: " + weatherData.dailySummary
             }
-        } else {
-            weatherLabel.text = "Weather Forecast: Unpredicted"
         }
     }
     func setupMapView() {
@@ -184,7 +186,7 @@ class DetailViewController: UIViewController {
         view.addSubview(directionLabel)
         view.addSubview(directionButton)
         
-        weatherLabel = UILabel(frame: CGRect(x: 0, y: directionLabel.frame.maxY + 30, width: view.frame.width, height: 40))
+        weatherLabel = UILabel(frame: CGRect(x: 0, y: directionLabel.frame.maxY + 30, width: view.frame.width, height: 100))
         weatherLabel.layer.borderColor = UIColor.black.cgColor
         weatherLabel.layer.borderWidth = 2
         weatherLabel.text = "Weather Forecast: "
@@ -242,7 +244,7 @@ class DetailViewController: UIViewController {
         view.addSubview(eventImageView)
     }
     func setupExit() {
-        exitButton = UIButton(frame: CGRect(x: 310, y: 20, width: 30, height: 30))
+        exitButton = UIButton(frame: CGRect(x: 320, y: 20, width: 30, height: 30))
         exitButton.setImage(UIImage(named: "exit"), for: .normal)
         exitButton.addTarget(self, action: #selector(exitScreen), for: .touchUpInside)
         view.addSubview(exitButton)
@@ -257,7 +259,15 @@ class DetailViewController: UIViewController {
         posterLabel.text = "Host: " + poster!
         posterLabel.textAlignment = .center
         posterLabel.font = UIFont(name: "Strawberry Blossom", size: 40)
+      //  posterLabel.font = UIFont.systemFont(ofSize: 20.0)
         view.addSubview(posterLabel)
+        
+        dateLabel = UILabel(frame: CGRect(x: 0, y: 190, width: view.frame.width, height: 30))
+        dateLabel.text = "\(post.date!)"
+        dateLabel.textAlignment = .center
+        dateLabel.font = UIFont.systemFont(ofSize: 20.0)
+        view.addSubview(dateLabel)
+
         
         eventNameLabel = UILabel(frame: CGRect(x: 0, y: 60, width: view.frame.width, height: 80))
         eventNameLabel.layer.borderColor = UIColor.black.cgColor
@@ -320,6 +330,7 @@ class DetailViewController: UIViewController {
         scrollView.addSubview(directionButton)
         scrollView.addSubview(directionLabel)
         scrollView.addSubview(weatherLabel)
+        scrollView.addSubview(dateLabel)
 //        scrollView.addSubview(lyftInfoLabel)
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: weatherLabel.frame.maxY+100)
         

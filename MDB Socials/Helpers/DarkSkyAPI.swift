@@ -6,29 +6,32 @@
 //  Copyright © 2018 Natasha Wong. All rights reserved.
 //
 
-import Foundation
-import Alamofire
-import SwiftyJSON
+//import Foundation
+//import Alamofire
+//import SwiftyJSON
+//
+//class DarkSkyAPI {
+////    var currentTemp = "Chilly"
+//    var minutelySummary = "Chilly"
+//    var hourlySummary = "Chilly"
+//    var dailySummary = "Chilly"
+//    var result = ["Chilly"]
+//
+//
+//
+////    func getWeather() -> [String] {
+//    var weatherData = Alamofire.request("https://api.darksky.net/forecast/50b32f864695d836f5360d46bdfb6a61/" + String(37.8716) + "," + String(122.2727)).responseJSON { response in
+//        if let json = response.result.value {
+//            let weatherData = JSON(json)
+//            //print(weatherData)
+//            let hourlySummary1 = weatherData["hourly"]["summary"].stringValue
+//            let dailySummary1 = weatherData["daily"]["summary"].stringValue
+//
+//        }
+//    }
+//
+//}
 
-class DarkSkyAPI {
-//    var currentTemp = "Chilly"
-    var minutelySummary = "Chilly"
-    var hourlySummary = "Chilly"
-    var dailySummary = "Chilly"
-    
-    func getWeather() {
-        var weatherData = Alamofire.request("https://api.darksky.net/forecast/50b32f864695d836f5360d46bdfb6a61/" + String(37.8716) + "," + String(122.2727)).responseJSON { response in
-            if let json = response.result.value {
-                let weatherData = JSON(json)
-//                self.currentTemp = Int(weatherData["currently"]["temperature"].double!)
-                self.minutelySummary = weatherData["minutely"]["summary"].stringValue
-                self.hourlySummary = weatherData["hourly"]["summary"].stringValue
-                self.dailySummary = weatherData["daily"]["summary"].stringValue
-            }
-        }
-    }
-}
-                
                 
                 
                 
